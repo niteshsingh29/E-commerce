@@ -4,7 +4,7 @@ import PlaceholderLoading from 'react-placeholder-loading'
 const CustomLoader = () => {
     return (
         <>
-            <div className="spinner d-flex mt-5">
+            <div className="spinner d-flex mt-5 flex-md-row">
                 {
                     [1, 2, 3].map((item) => {
                         return (
