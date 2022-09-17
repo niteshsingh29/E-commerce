@@ -8,13 +8,18 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addcartItem: (state, action) => {
-      console.log(action);
       if (action.payload) {
-        state.value.push(action.payload)
+        state.value.push(action.payload);
+      }
+    },
+    removeCartItem: (state, action) => {
+      if (action.payload) {
+        const newItem = state.value.filter((item) => item.id !== action.payload.id)
+        state.value = newItem;
       }
     }
   }
 })
 
-export const { addcartItem } = cartSlice.actions;
+export const { addcartItem, removeCartItem } = cartSlice.actions;
 export default cartSlice.reducer;

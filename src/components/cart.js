@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "../styles/cart.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeCartItem } from "./../Redux/CartSlice"
+ 
 
-
-const Cart = ({ cart, setCart, handleChange }) => {
+const Cart = () => {
+  const dispatch = useDispatch()
   const [price, setPrice] = useState(0);
   const [currentItems, setCurrentItems] = useState();
   const lengthItems = useSelector((state) => state.cartDetail.value);
 
   const handleRemove = (e, item) => {
-    const removedItems = currentItems?.filter((i) => i.id !== item.id);
-    setCurrentItems(removedItems);
+    dispatch(removeCartItem(item))
+    setCurrentItems(lengthItems);
   };
 
   const handlePrice = () => {
     let ans = 0;
-    currentItems?.map((item) => ans += item.price);
+    lengthItems?.map((item) => ans += item.price);
     setPrice(ans);
   };
 
   useEffect(() => {
-    setCurrentItems(lengthItems)
-  }, [lengthItems]);
-
-  useEffect(() => {
     handlePrice();
-  }, [lengthItems, currentItems]);
+    setCurrentItems(lengthItems);
+
+  }, [lengthItems]);
 
   return (
     <article>
